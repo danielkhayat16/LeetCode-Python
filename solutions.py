@@ -22,4 +22,14 @@ class Solutions:
             else :
                 buyDay = sellDay
             sellDay += 1
-        return tmpMax           
+        return tmpMax
+
+    #LeetCode .217 - Contains Duplicate
+    # Given an array of integers, return true if any velue appears at leat twice
+    def containsDuplicate (self, arr):
+        hashSet = set()
+        for num in arr:
+            if num in hashSet:
+                return True
+            hashSet.add(num)
+        return False

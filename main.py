@@ -6,6 +6,8 @@ def main():
     array2 = [6, 7, 2, 9, 6]
     print(test.twoSum(array1, 68) == [0,5])
     print(test.buySellStocks(array2) == 7)
+    print(test.containsDuplicate(array2) == True)
+    print(test.containsDuplicate(array1) == False)
 
 if __name__ == "__main__":
     main()
