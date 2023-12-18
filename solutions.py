@@ -79,25 +79,69 @@ class Solutions:
                 continue
             tmp = curMax * n
             curMax = max(n * curMax, n * curMin, n)
-            curMin = min (n * curMin, tmp, n)
+            curMin = min(n * curMin, tmp, n)
             res = max(res, curMax)
         return res
-    
-    #LeetCode .154 Finding the min value in a sorted array that have been pivoted once
+
+    # LeetCode .154 Finding the min value in a sorted array that have been pivoted once
 
     def findMin(self, nums):
         res = nums[0]
         l, r = 0, len(nums) - 1
 
-        while l <= r: 
+        while l <= r:
             if nums[l] < nums[r]:
                 res = min(res, nums[l])
                 break
 
-            m = (l+r) // 2
-            res = min (res, nums[m])
+            m = (l + r) // 2
+            res = min(res, nums[m])
             if nums[m] >= nums[l]:
                 l = m + 1
             else:
                 r = m - 1
         return res
+
+    def search(self, nums, target) -> int:
+        l, r = 0, len(nums) - 1
+
+        while l <= r:
+            mid = (l + r) // 2
+            if target == nums[mid]:
+                return mid
+
+            # left sorted portion
+            if nums[l] <= nums[mid]:
+                if target > nums[mid] or target < nums[l]:
+                    l = mid + 1
+                else:
+                    r = mid - 1
+            # right sorted portion
+            else:
+                if target < nums[mid] or target > nums[r]:
+                    r = mid - 1
+                else:
+                    l = mid + 1
+        return -1
+
+    def threeSum(self, nums):
+        res = []
+        nums.sort()
+        for i, a in enumerate(nums):
+            if i > 0 and a == nums[i - 1]:
+                continue
+            l, r = i + 1, len(nums) - 1
+            while l < r:
+                threeSum = a + nums[l] + nums[r]
+                if threeSum > 0:
+                    r -= 1
+                elif threeSum < 0:
+                    l += 1
+                else:
+                    res.append([a, nums[l], nums[r]])
+                    l += 1
+                    while nums[l] == nums[l - 1] and l < r:
+                        l += 1
+
+        return res
+        
