@@ -142,6 +142,70 @@ class Solutions:
                     l += 1
                     while nums[l] == nums[l - 1] and l < r:
                         l += 1
+        return res
+    
+    # LeetCode 11 Container with most Water
+    # You are given an integer array height of length n. Find two lines that together with the x-axis form a container, such that the container contains the most water.
+    # Return the maximum amount of water a container can store.
+    def containerWithMostWater(self, nums):
+        l, r = 0, len(nums)
+        res = 0
+        while(l < r):
+            curr = (r -l) * min (nums[r], nums[r])
+            res = max(res, curr)
+            if(nums[l] > nums[r]):
+                r  -= 1
+            else:
+                l += 1
+        return res
+    
+    #LeetCode 191 Number of 1 Bits
+    def numberOfOneBits(self, num):
+        res = 0
+        # First solution using modula
+        # while num: 
+        #     if( num % 2 == 1):
+        #         res += 1
+        #     num = num >> 1
+        while num:
+            num &= (num-1)
+            res += 1
+        return res
+    
+    #LeetCode 338 CountingBits
+    def countingBits(self, n):
+        dp = [0] * (n + 1)
+        offset = 1
+
+        for i in range(1, n + 1):
+            if offset * 2 == i:
+                offset = i
+            dp[i] = 1 + dp[i - offset]
+        
+        return dp
+
+    # LeetCode 268 MissingNumber
+    def missingNumber(self, nums):
+        numsSum = 0
+        for i in range(len(nums)):
+            numsSum += i - nums[i]
+        numsSum += len(nums)
+        return numsSum
+    # LeetCode 190 Reverse Bits - Binary
+    def reverseBits(self, num):
+        res = 0
+        for i in range(32):
+            bit = (num >> i) & 1
+            res = res | (bit << (31 - i))
+        return res
+
+    # Leetcode 70 Climbing stairs
+    def climbingStairs(self, n):
+        one, two = 1, 1
+        res = one
+        for i in range(n - 1):
+            res = one + two
+            two = one
+            one = res + one
 
         return res
-        
